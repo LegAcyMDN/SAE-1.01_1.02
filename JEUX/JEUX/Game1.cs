@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended.Screens;
 using System;
 using System.Collections.Generic;
 
@@ -37,12 +38,19 @@ namespace jeux
         public const int LARGEUR_FENETRE = 1900;
         public const int HAUTEUR_FENETRE = 1040;
 
+        private readonly ScreenManager _screenManager;
+
+        public SpriteBatch SpriteBatch { get; set; }
+        
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
+            _screenManager = new ScreenManager();
+            Components.Add(_screenManager);
         }
 
         protected override void Initialize()
@@ -112,6 +120,9 @@ namespace jeux
             };
 
             _textureBackgroundMenu = Content.Load<Texture2D>("backgroundMenu");
+
+            _myScreen1 = new MyScreen1(this); // en leur donnant une référence au Game
+            _myScreen2 = new MyScreen2(this);
             // TODO: use this.Content to load your game content here
         }
 
