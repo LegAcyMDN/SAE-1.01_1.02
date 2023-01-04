@@ -45,16 +45,16 @@ namespace jeux
 
             var playButton = new Button(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
             {
-                Position = new Vector2(200 , 250),
-                Text = "Play",
+                Position = new Vector2(850 , 421),
+                Text = "Jouer",
             };
 
             playButton.Click += PlayButton_Click;
 
             var quitButton = new Button(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
             {
-                Position = new Vector2(1000, 250),
-                Text = "Quit",
+                Position = new Vector2(0, 935),
+                Text = "Fermer",
             };
 
             quitButton.Click += QuitButton_Click;
