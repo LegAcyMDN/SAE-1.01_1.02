@@ -52,36 +52,44 @@ namespace jeux
         }
 
         protected override void Initialize()
-        { 
-           
-
-            _textureCharacterP = Content.Load<Texture2D>("characterP");
-            _texturePoint = Content.Load<Texture2D>("Point");
-            _textureObstacleP = Content.Load<Texture2D>("ObstacleP");
-            _textureObstacleD = Content.Load<Texture2D>("ObstacleD");
-            _textureObstacleT = Content.Load<Texture2D>("ObstacleT");
-            _textureObstacleQ = Content.Load<Texture2D>("ObstacleQ");
-
-
-            
-
-
-            credit = 0;
-            score = 0;
-            vie = 3;
 
         {
-            // TODO: Add your initialization logic here
-            _graphics.PreferredBackBufferWidth = LARGEUR_FENETRE;
-            _graphics.PreferredBackBufferHeight = HAUTEUR_FENETRE;
-            _graphics.ApplyChanges();
 
-            base.Initialize();
+
+            {
+                // TODO: Add your initialization logic here
+                _graphics.PreferredBackBufferWidth = LARGEUR_FENETRE;
+                _graphics.PreferredBackBufferHeight = HAUTEUR_FENETRE;
+                _graphics.ApplyChanges();
+
+                IsMouseVisible = true;
+
+
+               _textureCharacterP = Content.Load<Texture2D>("characterP");
+                _texturePoint = Content.Load<Texture2D>("Point");
+                _textureObstacleP = Content.Load<Texture2D>("ObstacleP");
+                _textureObstacleD = Content.Load<Texture2D>("ObstacleD");
+                _textureObstacleT = Content.Load<Texture2D>("ObstacleT");
+                _textureObstacleQ = Content.Load<Texture2D>("ObstacleQ");
+
+
+
+
+
+                credit = 0;
+                score = 0;
+                vie = 3;
+
+
+                _graphics.ApplyChanges();
+                base.Initialize();
+            }
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+
 
             var playButton = new Button(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
             {
@@ -101,12 +109,12 @@ namespace jeux
 
             _gameComponents = new List<Component>()
             {
-                playButton,
+                playButton, 
                 quitButton,
             };
 
             _textureBackgroundMenu = Content.Load<Texture2D>("backgroundMenu");
-            // TODO: use this.Content to load your game content here
+
         }
 
         private void QuitButton_Click(object sender, System.EventArgs e)
@@ -133,19 +141,20 @@ namespace jeux
 
         protected override void Draw(GameTime gameTime)
         {
-            // TODO: Add your drawing code here
-
-            _spriteBatch.DrawString(_police, $"Score  : {score}", _positionScore, Color.White);
-            _spriteBatch.DrawString(_police, $"Vie   : {vie}", _positionVie, Color.Red);
-            _spriteBatch.DrawString(_police, $"Crédit  : {credit}", _positionCredit, Color.Blue);
-
             GraphicsDevice.Clear(_backgroundColour);
 
-            _spriteBatch.Begin();
+            
             _spriteBatch.Draw(_textureBackgroundMenu, new Rectangle(0, 0, LARGEUR_FENETRE, HAUTEUR_FENETRE), Color.White);
             foreach (var component in _gameComponents)
                 component.Draw(gameTime, _spriteBatch);
             _spriteBatch.End();
+
+            // TODO: Add your drawing code here
+
+            /*_spriteBatch.DrawString(_police, $"Score  : {score}", _positionScore, Color.White);
+            _spriteBatch.DrawString(_police, $"Vie   : {vie}", _positionVie, Color.Red);
+            _spriteBatch.DrawString(_police, $"Crédit  : {credit}", _positionCredit, Color.Blue);*/
+
 
 
             _spriteBatch.Begin();
