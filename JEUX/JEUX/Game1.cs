@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace jeux
 {
@@ -8,6 +9,11 @@ namespace jeux
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+
+        private Texture2D _textureBackgroundMenu;
+
+        public const int LARGEUR_FENETRE = 1900;
+        public const int HAUTEUR_FENETRE = 1040;
 
         public Game1()
         {
@@ -19,6 +25,9 @@ namespace jeux
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            _graphics.PreferredBackBufferWidth = LARGEUR_FENETRE;
+            _graphics.PreferredBackBufferHeight = HAUTEUR_FENETRE;
+            _graphics.ApplyChanges();
 
             base.Initialize();
         }
@@ -27,6 +36,7 @@ namespace jeux
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            _textureBackgroundMenu = Content.Load<Texture2D>("backgroundMenu");
             // TODO: use this.Content to load your game content here
         }
 
@@ -43,6 +53,10 @@ namespace jeux
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            _spriteBatch.Begin();
+            _spriteBatch.Draw(_textureBackgroundMenu, new Rectangle(0, 0, LARGEUR_FENETRE, HAUTEUR_FENETRE), Color.White);
+            _spriteBatch.End();
 
             // TODO: Add your drawing code here
 
