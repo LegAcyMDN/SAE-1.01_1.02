@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
-using MonoGame.Extended.Screens.Transitions;
 using System;
 using System.Collections.Generic;
 
@@ -32,7 +31,7 @@ namespace jeux
         private SpriteFont _police;*/
         
         private Color _backgroundColour = Color.CornflowerBlue;
-        private List<Component> _gameComponents;
+        private List<Composantes> _gameComponents;
 
         private Texture2D _textureBackgroundMenu;
 
@@ -43,7 +42,7 @@ namespace jeux
 
         public SpriteBatch SpriteBatch { get; set; }
         
-        private Touche _touche;
+        private Test _test;
         private Regle _regle;        
 
         public Game1()
@@ -85,69 +84,69 @@ namespace jeux
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            var playButton = new Button(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
+            var jouerBouton = new Bouton(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
             {
                 Position = new Vector2(850 , 421),
                 Text = "JOUER",
             };
 
-            playButton.Click += PlayButton_Click;
+            jouerBouton.Click += JouerBouton_Click;
 
-            var quitButton = new Button(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
+            var quitterBouton = new Bouton(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
             {
                 Position = new Vector2(0, 935),
                 Text = "FERMER",
             };
 
-            quitButton.Click += QuitButton_Click;
+            quitterBouton.Click += QuitterBouton_Click;
 
-            var keyButton = new Button(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
+            var toucheBouton = new Bouton(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
             {
                 Position = new Vector2(1700, 935),
                 Text = "TOUCHE",
             };
 
-            keyButton.Click += KeyButton_Click;
+            toucheBouton.Click += ToucheBouton_Click;
 
-            var ruleButton = new Button(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
+            var regleBouton = new Bouton(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
             {
                 Position = new Vector2(1700, 0),
                 Text = "REGLE",
             };
 
-            ruleButton.Click += RuleButton_Click;
+            regleBouton.Click += RegleBouton_Click;
 
-            _gameComponents = new List<Component>()
+            _gameComponents = new List<Composantes>()
             {
-                playButton, 
-                quitButton,
-                keyButton,
-                ruleButton,
+                jouerBouton, 
+                quitterBouton,
+                toucheBouton,
+                regleBouton,
             };
 
             _textureBackgroundMenu = Content.Load<Texture2D>("backgroundMenu");
 
-            _touche = new Touche(this); // en leur donnant une référence au Game
+            _test = new Test(this); // en leur donnant une référence au Game
             _regle = new Regle(this);
             // TODO: use this.Content to load your game content here
         }
 
-        private void RuleButton_Click(object sender, EventArgs e)
+        private void RegleBouton_Click(object sender, EventArgs e)
         {
             _screenManager.LoadScreen(_regle);
         }
 
-        private void KeyButton_Click(object sender, EventArgs e)
+        private void ToucheBouton_Click(object sender, EventArgs e)
         {
-            _screenManager.LoadScreen(_touche);
+            _screenManager.LoadScreen(_test);
         }
 
-        private void QuitButton_Click(object sender, EventArgs e)
+        private void QuitterBouton_Click(object sender, EventArgs e)
         {
             Exit();
         }
 
-        private void PlayButton_Click(object sender, EventArgs e)
+        private void JouerBouton_Click(object sender, EventArgs e)
         {
             var random = new Random();
 

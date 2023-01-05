@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace jeux.Controls
 {
-    public class Button : Component
+    public class Bouton : Composantes
     {
         #region Fields
 
@@ -49,7 +49,7 @@ namespace jeux.Controls
 
         #region Methods
 
-        public Button(Texture2D texture, SpriteFont font)
+        public Bouton(Texture2D texture, SpriteFont font)
         {
             _texture = texture;
 
