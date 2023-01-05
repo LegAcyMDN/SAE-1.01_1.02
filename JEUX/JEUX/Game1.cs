@@ -56,26 +56,6 @@ namespace jeux
         protected override void Initialize()
 
         {
-
-
-            {
-                // TODO: Add your initialization logic here
-                _graphics.PreferredBackBufferWidth = LARGEUR_FENETRE;
-                _graphics.PreferredBackBufferHeight = HAUTEUR_FENETRE;
-                _graphics.ApplyChanges();
-
-                IsMouseVisible = true;
-
-
-               _textureCharacterP = Content.Load<Texture2D>("characterP");
-                _texturePoint = Content.Load<Texture2D>("Point");
-                _textureObstacleP = Content.Load<Texture2D>("ObstacleP");
-                _textureObstacleD = Content.Load<Texture2D>("ObstacleD");
-                _textureObstacleT = Content.Load<Texture2D>("ObstacleT");
-                _textureObstacleQ = Content.Load<Texture2D>("ObstacleQ");
-        {
-            // TODO: Add your initialization logic here
-
             /*_textureCharacterP = Content.Load<Texture2D>("characterP");
             _texturePoint = Content.Load<Texture2D>("Point");
             _textureObstacleP = Content.Load<Texture2D>("ObstacleP");
@@ -87,22 +67,19 @@ namespace jeux
             score = 0;
             vie = 3;*/
 
+            // TODO: Add your initialization logic here
             _graphics.PreferredBackBufferWidth = LARGEUR_FENETRE;
             _graphics.PreferredBackBufferHeight = HAUTEUR_FENETRE;
             _graphics.ApplyChanges();
 
-            base.Initialize();
-        }
+            IsMouseVisible = true;
 
-                _graphics.ApplyChanges();
-                base.Initialize();
-            }
+            base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
 
             var playButton = new Button(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
             {
@@ -146,8 +123,8 @@ namespace jeux
 
             _textureBackgroundMenu = Content.Load<Texture2D>("backgroundMenu");
 
-            _myScreen1 = new MyScreen1(this); // en leur donnant une référence au Game
-            _myScreen2 = new MyScreen2(this);
+            /*_myScreen1 = new MyScreen1(this); // en leur donnant une référence au Game
+            _myScreen2 = new MyScreen2(this);*/
             // TODO: use this.Content to load your game content here
         }
 
@@ -187,29 +164,22 @@ namespace jeux
         {
             GraphicsDevice.Clear(_backgroundColour);
 
-            /*_spriteBatch.DrawString(_police, $"Score  : {score}", _positionScore, Color.White);
-            _spriteBatch.DrawString(_police, $"Vie   : {vie}", _positionVie, Color.Red);
-            _spriteBatch.DrawString(_police, $"Crédit  : {credit}", _positionCredit, Color.Blue);*/
-
-            GraphicsDevice.Clear(_backgroundColour);
-
-            _spriteBatch.Begin();
-            _spriteBatch.Draw(_textureBackgroundMenu, new Rectangle(0, 0, LARGEUR_FENETRE, HAUTEUR_FENETRE), Color.White);
-            foreach (var component in _gameComponents)
-                component.Draw(gameTime, _spriteBatch);
-            _spriteBatch.End();
-
             // TODO: Add your drawing code here
 
+            _spriteBatch.Begin();
+
+            _spriteBatch.Draw(_textureBackgroundMenu, new Rectangle(0, 0, LARGEUR_FENETRE, HAUTEUR_FENETRE), Color.White);
+            
+            foreach (var component in _gameComponents)
+                component.Draw(gameTime, _spriteBatch);
+
             /*_spriteBatch.DrawString(_police, $"Score  : {score}", _positionScore, Color.White);
             _spriteBatch.DrawString(_police, $"Vie   : {vie}", _positionVie, Color.Red);
             _spriteBatch.DrawString(_police, $"Crédit  : {credit}", _positionCredit, Color.Blue);*/
 
-
+            _spriteBatch.End();
 
             base.Draw(gameTime);
-
-
         }
     }
 }
