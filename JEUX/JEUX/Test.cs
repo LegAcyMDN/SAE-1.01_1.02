@@ -31,7 +31,6 @@ namespace jeux
             _myGame = game;
 
             _screenManager = new ScreenManager();
-            Components.Add(_screenManager);
         }
         public override void LoadContent()
         {
@@ -57,7 +56,8 @@ namespace jeux
 
         public void QuitKeyButton_Click(object sender, EventArgs e)
         {
-            _screenManager.LoadScreen(_myGame);
+            this.Dispose();
+            //_screenManager.LoadScreen(_myGame);
         }
 
         public override void Update(GameTime gameTime)
