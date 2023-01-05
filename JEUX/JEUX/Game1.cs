@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
+using MonoGame.Extended.Screens.Transitions;
 using System;
 using System.Collections.Generic;
 
@@ -16,12 +17,12 @@ namespace jeux
         public const int hauteurP = 150;
         public const int largeurP = 50;
         
-        private Texture2D _textureCharacterP;
+        /*private Texture2D _textureCharacterP;
         private Texture2D _texturePoint;
         private Texture2D _textureObstacleP;
         private Texture2D _textureObstacleD;
         private Texture2D _textureObstacleT;
-        private Texture2D _textureObstacleQ;
+        private Texture2D _textureObstacleQ;*/
 
         /*private int score;
         private int credit;
@@ -42,12 +43,15 @@ namespace jeux
 
         public SpriteBatch SpriteBatch { get; set; }
         
+        private Touche _touche;
+        private Regle _regle;        
 
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+
 
             _screenManager = new ScreenManager();
             Components.Add(_screenManager);
@@ -123,19 +127,19 @@ namespace jeux
 
             _textureBackgroundMenu = Content.Load<Texture2D>("backgroundMenu");
 
-            /*_myScreen1 = new MyScreen1(this); // en leur donnant une référence au Game
-            _myScreen2 = new MyScreen2(this);*/
+            _touche = new Touche(this); // en leur donnant une référence au Game
+            _regle = new Regle(this);
             // TODO: use this.Content to load your game content here
         }
 
         private void RuleButton_Click(object sender, EventArgs e)
         {
-            Exit();
+            _screenManager.LoadScreen(_regle);
         }
 
         private void KeyButton_Click(object sender, EventArgs e)
         {
-            Exit();
+            _screenManager.LoadScreen(_touche);
         }
 
         private void QuitButton_Click(object sender, EventArgs e)
