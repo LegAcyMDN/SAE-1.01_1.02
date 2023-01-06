@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using jeux.Controls;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Screens;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace jeux
 {
-    internal class Regle : GameScreen
+    internal class ScreenTouche : GameScreen
     {
         private Game1 _myGame;
         // pour récupérer une référence à l’objet game pour avoir accès à tout ce qui est
@@ -19,7 +20,7 @@ namespace jeux
 
         private Texture2D _textureBackgroundMenu;
 
-        public Regle(Game1 game) : base(game)
+        public ScreenTouche(Game1 game) : base(game)
         {
             _myGame = game;
         }
@@ -41,3 +42,4 @@ namespace jeux
         }
     }
 }
+

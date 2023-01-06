@@ -31,7 +31,6 @@ namespace jeux
         private SpriteFont _police;*/
         
         private Color _backgroundColour = Color.CornflowerBlue;
-        private List<Composantes> _gameComponents;
 
         private Texture2D _textureBackgroundMenu;
 
@@ -41,9 +40,8 @@ namespace jeux
         private readonly ScreenManager _screenManager;
 
         public SpriteBatch SpriteBatch { get; set; }
-        
-        private Test _test;
-        private Regle _regle;        
+
+        private ScreenMenu _menu;        
 
         public Game1()
         {
@@ -84,81 +82,22 @@ namespace jeux
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            var jouerBouton = new Bouton(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
-            {
-                Position = new Vector2(850 , 421),
-                Text = "JOUER",
-            };
-
-            jouerBouton.Click += JouerBouton_Click;
-
-            var quitterBouton = new Bouton(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
-            {
-                Position = new Vector2(0, 935),
-                Text = "FERMER",
-            };
-
-            quitterBouton.Click += QuitterBouton_Click;
-
-            var toucheBouton = new Bouton(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
-            {
-                Position = new Vector2(1700, 935),
-                Text = "TOUCHE",
-            };
-
-            toucheBouton.Click += ToucheBouton_Click;
-
-            var regleBouton = new Bouton(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
-            {
-                Position = new Vector2(1700, 0),
-                Text = "REGLE",
-            };
-
-            regleBouton.Click += RegleBouton_Click;
-
-            _gameComponents = new List<Composantes>()
-            {
-                jouerBouton, 
-                quitterBouton,
-                toucheBouton,
-                regleBouton,
-            };
-
             _textureBackgroundMenu = Content.Load<Texture2D>("backgroundMenu");
 
-            _test = new Test(this); // en leur donnant une référence au Game
-            _regle = new Regle(this);
+            _menu = new ScreenMenu(this); // en leur donnant une référence au Game
+            
             // TODO: use this.Content to load your game content here
-        }
-
-        private void RegleBouton_Click(object sender, EventArgs e)
-        {
-            _screenManager.LoadScreen(_regle);
-        }
-
-        private void ToucheBouton_Click(object sender, EventArgs e)
-        {
-            _screenManager.LoadScreen(_test);
-        }
-
-        private void QuitterBouton_Click(object sender, EventArgs e)
-        {
-            Exit();
-        }
-
-        private void JouerBouton_Click(object sender, EventArgs e)
-        {
-            var random = new Random();
-
-            _backgroundColour = new Color(random.Next(0, 255), random.Next(0, 255),random.Next(0, 255));
         }
 
         protected override void Update(GameTime gameTime)
         {
-            foreach(var component in _gameComponents)
-                component.Update(gameTime);
-
             // TODO: Add your update logic here
+
+            KeyboardState keyboardState = Keyboard.GetState();
+            if (keyboardState.IsKeyDown(Keys.M))
+            {
+                _screenManager.LoadScreen(_menu);
+            }
 
             base.Update(gameTime);
         }
@@ -172,9 +111,6 @@ namespace jeux
             _spriteBatch.Begin();
 
             _spriteBatch.Draw(_textureBackgroundMenu, new Rectangle(0, 0, LARGEUR_FENETRE, HAUTEUR_FENETRE), Color.White);
-            
-            foreach (var component in _gameComponents)
-                component.Draw(gameTime, _spriteBatch);
 
             /*_spriteBatch.DrawString(_police, $"Score  : {score}", _positionScore, Color.White);
             _spriteBatch.DrawString(_police, $"Vie   : {vie}", _positionVie, Color.Red);
