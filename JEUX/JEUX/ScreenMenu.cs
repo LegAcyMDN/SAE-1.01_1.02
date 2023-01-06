@@ -29,10 +29,7 @@ namespace jeux
 
         private readonly ScreenManager _screenManager;
 
-        public SpriteBatch SpriteBatch { get; set; }
-
-        private ScreenRegle _regle;
-        private ScreenTest _test;
+        public SpriteBatch SpriteBatch { get; set; }        
 
         public ScreenMenu(Game1 game) : base(game)
         {
@@ -90,20 +87,17 @@ namespace jeux
 
             _textureBackgroundMenu = Content.Load<Texture2D>("backgroundMenu");
 
-            _test = new ScreenTest(this);
-            _regle = new ScreenRegle(this);
-
             base.LoadContent();
         }
 
         private void RegleBouton_Click(object sender, EventArgs e)
         {
-            _screenManager.LoadScreen(_regle);
+            //_screenManager.LoadScreen(_regle);
         }
 
         private void ToucheBouton_Click(object sender, EventArgs e)
         {
-            _screenManager.LoadScreen(_test);
+            //_screenManager.LoadScreen(_test);
         }
 
         private void QuitterBouton_Click(object sender, EventArgs e)

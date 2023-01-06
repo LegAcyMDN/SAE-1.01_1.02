@@ -52,6 +52,10 @@ namespace jeux
 
             _screenManager = new ScreenManager();
             Components.Add(_screenManager);
+
+            //_test = new ScreenTest(this);
+            //_regle = new ScreenRegle(this);
+            _menu = new ScreenMenu(this);
         }
 
         protected override void Initialize()
@@ -84,20 +88,16 @@ namespace jeux
 
             _textureBackgroundMenu = Content.Load<Texture2D>("backgroundMenu");
 
-            _menu = new ScreenMenu(this); // en leur donnant une référence au Game
-            
+            _screenManager.LoadScreen(_menu);
+
+
+
             // TODO: use this.Content to load your game content here
         }
 
         protected override void Update(GameTime gameTime)
         {
-            // TODO: Add your update logic here
-
-            KeyboardState keyboardState = Keyboard.GetState();
-            if (keyboardState.IsKeyDown(Keys.M))
-            {
-                _screenManager.LoadScreen(_menu);
-            }
+            // TODO: Add your update logic here           
 
             base.Update(gameTime);
         }
