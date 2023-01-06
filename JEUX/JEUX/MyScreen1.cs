@@ -11,8 +11,8 @@ namespace jeux
     internal class MyScreen1 : GameScreen
     {
         private Game1 _myGame;
-        // pour récupérer une référence à l’objet game pour avoir accès à tout ce qui est
-        // défini dans Game1
+       /* pour récupérer une référence à l’objet game pour avoir accès à tout ce qui est
+         défini dans Game1*/
         public MyScreen1(Game1 game) : base(game)
         {
             _myGame = game;
@@ -26,7 +26,7 @@ namespace jeux
         public override void Draw(GameTime gameTime)
         {
             _myGame.GraphicsDevice.Clear(Color.Red); // on utilise la reference vers
-                                                     // Game1 pour chnager le graphisme
+                                                     // Game1 pour changer le graphisme
         }
     }
 }

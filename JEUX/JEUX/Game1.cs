@@ -26,9 +26,9 @@ namespace jeux
         /*private int score;
         private int credit;
         private int vie;
-        private int _sensCharacter;
+        private int _sensCharacter;*/
 
-        private SpriteFont _police;*/
+        private SpriteFont _police;
         
         private Color _backgroundColour = Color.CornflowerBlue;
         private List<Component> _gameComponents;
@@ -67,25 +67,20 @@ namespace jeux
                 IsMouseVisible = true;
 
 
-               _textureCharacterP = Content.Load<Texture2D>("characterP");
+            /*   _textureCharacterP = Content.Load<Texture2D>("characterP");
                 _texturePoint = Content.Load<Texture2D>("Point");
                 _textureObstacleP = Content.Load<Texture2D>("ObstacleP");
                 _textureObstacleD = Content.Load<Texture2D>("ObstacleD");
                 _textureObstacleT = Content.Load<Texture2D>("ObstacleT");
-                _textureObstacleQ = Content.Load<Texture2D>("ObstacleQ");
+                _textureObstacleQ = Content.Load<Texture2D>("ObstacleQ");   */
         {
             // TODO: Add your initialization logic here
 
-            /*_textureCharacterP = Content.Load<Texture2D>("characterP");
-            _texturePoint = Content.Load<Texture2D>("Point");
-            _textureObstacleP = Content.Load<Texture2D>("ObstacleP");
-            _textureObstacleD = Content.Load<Texture2D>("ObstacleD");
-            _textureObstacleT = Content.Load<Texture2D>("ObstacleT");
-            _textureObstacleQ = Content.Load<Texture2D>("ObstacleQ");*/
+            
 
-            /*credit = 0;
-            score = 0;
-            vie = 3;*/
+              /*   credit = 0;
+                score = 0;
+                vie = 3;*/
 
             _graphics.PreferredBackBufferWidth = LARGEUR_FENETRE;
             _graphics.PreferredBackBufferHeight = HAUTEUR_FENETRE;
@@ -123,7 +118,7 @@ namespace jeux
             var keyButton = new Button(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
             {
                 Position = new Vector2(1700, 935),
-                Text = "TOUCHE",
+                Text = "TOUCHES",
             };
 
             keyButton.Click += KeyButton_Click;
@@ -131,7 +126,7 @@ namespace jeux
             var ruleButton = new Button(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
             {
                 Position = new Vector2(1700, 0),
-                Text = "REGLE",
+                Text = "REGLES",
             };
 
             ruleButton.Click += RuleButton_Click;
@@ -144,10 +139,11 @@ namespace jeux
                 ruleButton,
             };
 
+            _police = Content.Load<SpriteFont>("Fonts/Font");
             _textureBackgroundMenu = Content.Load<Texture2D>("backgroundMenu");
 
-            _myScreen1 = new MyScreen1(this); // en leur donnant une référence au Game
-            _myScreen2 = new MyScreen2(this);
+          /*  _myScreen1 = new MyScreen1(this); // en leur donnant une référence au Game
+            _myScreen2 = new MyScreen2(this);*/
             // TODO: use this.Content to load your game content here
         }
 
@@ -180,6 +176,7 @@ namespace jeux
 
             // TODO: Add your update logic here
 
+            
             base.Update(gameTime);
         }
 
@@ -197,15 +194,13 @@ namespace jeux
             _spriteBatch.Draw(_textureBackgroundMenu, new Rectangle(0, 0, LARGEUR_FENETRE, HAUTEUR_FENETRE), Color.White);
             foreach (var component in _gameComponents)
                 component.Draw(gameTime, _spriteBatch);
-            _spriteBatch.End();
+            
 
             // TODO: Add your drawing code here
 
-            /*_spriteBatch.DrawString(_police, $"Score  : {score}", _positionScore, Color.White);
-            _spriteBatch.DrawString(_police, $"Vie   : {vie}", _positionVie, Color.Red);
-            _spriteBatch.DrawString(_police, $"Crédit  : {credit}", _positionCredit, Color.Blue);*/
+           
 
-
+            _spriteBatch.End();
 
             base.Draw(gameTime);
 
