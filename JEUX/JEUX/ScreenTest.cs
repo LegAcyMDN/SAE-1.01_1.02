@@ -1,4 +1,4 @@
-﻿using jeux.Controls;
+﻿/*using jeux.Controls;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Screens;
@@ -74,4 +74,4 @@ namespace jeux
             _spriteBatch.End();
         }
     }
-}
+}*/
