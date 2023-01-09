@@ -27,7 +27,7 @@ namespace jeux
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            //_textureBackgroundMenu = Content.Load<Texture2D>("backgroundMenu");
+            _textureBackgroundMenu = Content.Load<Texture2D>("backgroundMenu");
 
             base.LoadContent();
         }
@@ -36,8 +36,8 @@ namespace jeux
         public override void Draw(GameTime gameTime)
         {
             _spriteBatch.Begin();
-            _myGame.GraphicsDevice.Clear(Color.Green);
-            //_spriteBatch.Draw(_textureBackgroundMenu, new Rectangle(0, 0, 1900, 1040), Color.White);
+            
+            _spriteBatch.Draw(_textureBackgroundMenu, new Rectangle(0, 0, 1900, 1040), Color.White);
             _spriteBatch.End();
         }
     }
