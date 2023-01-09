@@ -1,6 +1,7 @@
 ﻿using jeux.Controls;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace jeux
 {
-    internal class Test : GameScreen
+    internal class ScreenTouche : GameScreen
     {
         private Game1 _myGame;
         // pour récupérer une référence à l’objet game pour avoir accès à tout ce qui est
@@ -22,48 +23,40 @@ namespace jeux
 
         private Texture2D _textureBackgroundMenu;
 
-        private readonly ScreenManager _screenManager;
+        private Rectangle boutonFermerTouche;
 
-        public SpriteBatch SpriteBatch { get; set; }
-
-        public Test(Game1 game) : base(game)
+        public ScreenTouche(Game1 game) : base(game)
         {
             _myGame = game;
-
-            _screenManager = new ScreenManager();
         }
         public override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            var quitKeyButton = new Bouton(Content.Load<Texture2D>("Controls/button3"), Content.Load<SpriteFont>("Fonts/Font"))
-            {
-                Position = new Vector2(1700, 935),
-                Text = "FERMER",
-            };
+            boutonFermerTouche = new Rectangle(20, 20, 70, 70);
 
-            quitKeyButton.Click += QuitKeyButton_Click;
+            var quitterBouton = new Bouton(Content.Load<Texture2D>("Controls/ButtonClose"), Content.Load<SpriteFont>("Fonts/Font"))
+            {
+                Position = new Vector2(20, 20),
+                Text = "",
+            };
 
             _gameComponents = new List<Composantes>()
-            {
-                quitKeyButton
-            };
+            { quitterBouton };
 
             _textureBackgroundMenu = Content.Load<Texture2D>("backgroundMenu");
 
             base.LoadContent();
         }
-
-        public void QuitKeyButton_Click(object sender, EventArgs e)
-        {
-            this.Dispose();
-            //_screenManager.LoadScreen(_myGame);
-        }
-
         public override void Update(GameTime gameTime)
         {
-            foreach (var component in _gameComponents)
-                component.Update(gameTime);
+            MouseState _mouseState = Mouse.GetState();
+            if (_mouseState.LeftButton == ButtonState.Pressed)
+            {
+                Console.WriteLine(Mouse.GetState().X + "," + Mouse.GetState().Y);
+                if (boutonFermerTouche.Contains(Mouse.GetState().X, Mouse.GetState().Y))
+                { _myGame.Etat = Game1.Etats.FermerTouche; }
+            }
         }
 
         public override void Draw(GameTime gameTime)
@@ -76,3 +69,4 @@ namespace jeux
         }
     }
 }
+

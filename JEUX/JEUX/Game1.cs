@@ -12,10 +12,48 @@ namespace jeux
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-       
-        public const int hauteurP = 150;
-        public const int largeurP = 50;
+
+        //private List<Composantes> _gameComponents;
+
+        private Color _backgroundColour = Color.CornflowerBlue;
+
+        private Texture2D _textureBackgroundMenu;
+
+        public const int LARGEUR_FENETRE = 1900;
+        public const int HAUTEUR_FENETRE = 1040;
+
+        private readonly ScreenManager _screenManager;
+
+        public enum Etats {Menu, Jouer, Controle, Regle, Quitter, FermerTouche, 
+                            FermerRegle};
+        private Etats etat;
+
+        private ScreenMenu _menu;
+        private ScreenTouche _touche;
+        private ScreenRegle _regle;
+        private ScreenJouer _jouer;
         
+        public SpriteBatch SpriteBatch 
+        { 
+            get
+                { return this._spriteBatch; } 
+
+            set
+                { this._spriteBatch = value; }
+        }
+
+        public Etats Etat
+        {
+            get
+                { return this.etat; }
+
+            set
+                { this.etat = value; }
+        }
+
+        /*public const int hauteurP = 150;
+        public const int largeurP = 50;*/
+
         /*private Texture2D _textureCharacterP;
         private Texture2D _texturePoint;
         private Texture2D _textureObstacleP;
@@ -28,7 +66,7 @@ namespace jeux
         private int vie;
         private int _sensCharacter;*/
 
-        private SpriteFont _police;
+        private SpriteFont _police;*/
         
         private Color _backgroundColour = Color.CornflowerBlue;
         private List<Composantes> _gameComponents;
@@ -48,63 +86,52 @@ namespace jeux
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
+            _graphics.PreferredBackBufferWidth = LARGEUR_FENETRE;
+            _graphics.PreferredBackBufferHeight = HAUTEUR_FENETRE;
+
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-
-
             _screenManager = new ScreenManager();
             Components.Add(_screenManager);
+
+            Etat = Etats.Menu;
+
+            _menu = new ScreenMenu(this);
+            _touche = new ScreenTouche(this);
+            _regle = new ScreenRegle(this);
+            _jouer = new ScreenJouer(this);
+
+            //_test = new ScreenTest(this);
         }
 
         protected override void Initialize()
-
         {
+            /*_textureCharacterP = Content.Load<Texture2D>("characterP");
+            _texturePoint = Content.Load<Texture2D>("Point");
+            _textureObstacleP = Content.Load<Texture2D>("ObstacleP");
+            _textureObstacleD = Content.Load<Texture2D>("ObstacleD");
+            _textureObstacleT = Content.Load<Texture2D>("ObstacleT");
+            _textureObstacleQ = Content.Load<Texture2D>("ObstacleQ");*/
 
+            /*credit = 0;
+            score = 0;
+            vie = 3;*/
 
-            {
-                // TODO: Add your initialization logic here
-                _graphics.PreferredBackBufferWidth = LARGEUR_FENETRE;
-                _graphics.PreferredBackBufferHeight = HAUTEUR_FENETRE;
-                _graphics.ApplyChanges();
+            // TODO: Add your initialization logic here
+            _graphics.PreferredBackBufferWidth = LARGEUR_FENETRE;
+            _graphics.PreferredBackBufferHeight = HAUTEUR_FENETRE;
+            _graphics.ApplyChanges();
 
-                IsMouseVisible = true;
+            IsMouseVisible = true;
 
-
-                /*     _textureCharacterP = Content.Load<Texture2D>("characterP");
-                      _texturePoint = Content.Load<Texture2D>("Point");
-                      _textureObstacleP = Content.Load<Texture2D>("ObstacleP");
-                      _textureObstacleD = Content.Load<Texture2D>("ObstacleD");
-                      _textureObstacleT = Content.Load<Texture2D>("ObstacleT");
-                      _textureObstacleQ = Content.Load<Texture2D>("ObstacleQ"); */
-                {
-                    // TODO: Add your initialization logic here
-
-                    /*_textureCharacterP = Content.Load<Texture2D>("characterP");
-                    _texturePoint = Content.Load<Texture2D>("Point");
-                    _textureObstacleP = Content.Load<Texture2D>("ObstacleP");
-                    _textureObstacleD = Content.Load<Texture2D>("ObstacleD");
-                    _textureObstacleT = Content.Load<Texture2D>("ObstacleT");
-                    _textureObstacleQ = Content.Load<Texture2D>("ObstacleQ");*/
-
-                    /*credit = 0;
-                    score = 0;
-                    vie = 3;*/
-
-                    // TODO: Add your initialization logic here
-                    _graphics.PreferredBackBufferWidth = LARGEUR_FENETRE;
-                    _graphics.PreferredBackBufferHeight = HAUTEUR_FENETRE;
-                    _graphics.ApplyChanges();
-
-                    IsMouseVisible = true;
-
-                    base.Initialize();
-                }
-            }
+            base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            _textureBackgroundMenu = Content.Load<Texture2D>("backgroundMenu");
+            _screenManager.LoadScreen(_menu);           
 
             var jouerBouton = new Bouton(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
             {
@@ -133,12 +160,13 @@ namespace jeux
             var regleBouton = new Bouton(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
             {
                 Position = new Vector2(1700, 0),
-                Text = "REGLES",
+                Text = "REGLE",
             };
 
             regleBouton.Click += RegleBouton_Click;
 
-            _gameComponents = new List<Composantes>()
+            MouseState _mouseState = Mouse.GetState();
+            if (_mouseState.LeftButton == ButtonState.Pressed)
             {
                 jouerBouton, 
                 quitterBouton,
@@ -146,42 +174,32 @@ namespace jeux
                 regleBouton,
             };
 
-            _police = Content.Load<SpriteFont>("Fonts/Font");
             _textureBackgroundMenu = Content.Load<Texture2D>("backgroundMenu");
 
-           _myScreen1 = new MyScreen1(this);  // en leur donnant une référence au Game
-            _myScreen2 = new MyScreen2(this);
+            _test = new Test(this); // en leur donnant une référence au Game
+            _regle = new Regle(this);
             // TODO: use this.Content to load your game content here
         }
 
-        private void RegleBouton_Click(object sender, EventArgs e)
-        {
-            _screenManager.LoadScreen(_regle);
-        }
+                else if (this.Etat == Etats.Regle)
+                    _screenManager.LoadScreen(_regle);
 
-        private void ToucheBouton_Click(object sender, EventArgs e)
-        {
-            _screenManager.LoadScreen(_test);
-        }
+                else if (this.Etat == Etats.Jouer)
+                    _screenManager.LoadScreen(_jouer);
 
-        private void QuitterBouton_Click(object sender, EventArgs e)
-        {
-            Exit();
-        }
+                else if (this.Etat == Etats.FermerTouche)
+                    _screenManager.LoadScreen(_menu);
 
-        private void JouerBouton_Click(object sender, EventArgs e)
-        {
-            var random = new Random();
+                else if (this.Etat == Etats.FermerRegle)
+                    _screenManager.LoadScreen(_menu);
 
-            _backgroundColour = new Color(random.Next(0, 255), random.Next(0, 255),random.Next(0, 255));
-        }
+            }
 
-        protected override void Update(GameTime gameTime)
-        {
-            foreach(var component in _gameComponents)
-                component.Update(gameTime);
-
-            // TODO: Add your update logic here
+            if (Keyboard.GetState().IsKeyDown(Keys.Back))
+            {
+                if (this.Etat == Etats.Menu)
+                    _screenManager.LoadScreen(_menu);
+            }
 
             
             base.Update(gameTime);
@@ -192,9 +210,7 @@ namespace jeux
             GraphicsDevice.Clear(_backgroundColour);
 
             // TODO: Add your drawing code here
-
             _spriteBatch.Begin();
-
             _spriteBatch.Draw(_textureBackgroundMenu, new Rectangle(0, 0, LARGEUR_FENETRE, HAUTEUR_FENETRE), Color.White);
             
             foreach (var component in _gameComponents)

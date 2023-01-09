@@ -1,5 +1,4 @@
-﻿using jeux.Controls;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Screens;
 using System;
@@ -10,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace jeux
 {
-    internal class Touche : GameScreen
+    internal class ScreenJouer : GameScreen
     {
         private Game1 _myGame;
         // pour récupérer une référence à l’objet game pour avoir accès à tout ce qui est
@@ -20,7 +19,7 @@ namespace jeux
 
         private Texture2D _textureBackgroundMenu;
 
-        public Touche(Game1 game) : base(game)
+        public ScreenJouer(Game1 game) : base(game)
         {
             _myGame = game;
         }
@@ -28,7 +27,7 @@ namespace jeux
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            _textureBackgroundMenu = Content.Load<Texture2D>("backgroundMenu");
+            //_textureBackgroundMenu = Content.Load<Texture2D>("backgroundMenu");
 
             base.LoadContent();
         }
@@ -37,9 +36,9 @@ namespace jeux
         public override void Draw(GameTime gameTime)
         {
             _spriteBatch.Begin();
-            _spriteBatch.Draw(_textureBackgroundMenu, new Rectangle(0, 0, 1900, 1040), Color.White);
+            _myGame.GraphicsDevice.Clear(Color.Green);
+            //_spriteBatch.Draw(_textureBackgroundMenu, new Rectangle(0, 0, 1900, 1040), Color.White);
             _spriteBatch.End();
         }
     }
 }
-
