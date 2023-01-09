@@ -70,34 +70,36 @@ namespace jeux
                 IsMouseVisible = true;
 
 
-               _textureCharacterP = Content.Load<Texture2D>("characterP");
-                _texturePoint = Content.Load<Texture2D>("Point");
-                _textureObstacleP = Content.Load<Texture2D>("ObstacleP");
-                _textureObstacleD = Content.Load<Texture2D>("ObstacleD");
-                _textureObstacleT = Content.Load<Texture2D>("ObstacleT");
-                _textureObstacleQ = Content.Load<Texture2D>("ObstacleQ");
-        {
-            // TODO: Add your initialization logic here
+                /*     _textureCharacterP = Content.Load<Texture2D>("characterP");
+                      _texturePoint = Content.Load<Texture2D>("Point");
+                      _textureObstacleP = Content.Load<Texture2D>("ObstacleP");
+                      _textureObstacleD = Content.Load<Texture2D>("ObstacleD");
+                      _textureObstacleT = Content.Load<Texture2D>("ObstacleT");
+                      _textureObstacleQ = Content.Load<Texture2D>("ObstacleQ"); */
+                {
+                    // TODO: Add your initialization logic here
 
-            /*_textureCharacterP = Content.Load<Texture2D>("characterP");
-            _texturePoint = Content.Load<Texture2D>("Point");
-            _textureObstacleP = Content.Load<Texture2D>("ObstacleP");
-            _textureObstacleD = Content.Load<Texture2D>("ObstacleD");
-            _textureObstacleT = Content.Load<Texture2D>("ObstacleT");
-            _textureObstacleQ = Content.Load<Texture2D>("ObstacleQ");*/
+                    /*_textureCharacterP = Content.Load<Texture2D>("characterP");
+                    _texturePoint = Content.Load<Texture2D>("Point");
+                    _textureObstacleP = Content.Load<Texture2D>("ObstacleP");
+                    _textureObstacleD = Content.Load<Texture2D>("ObstacleD");
+                    _textureObstacleT = Content.Load<Texture2D>("ObstacleT");
+                    _textureObstacleQ = Content.Load<Texture2D>("ObstacleQ");*/
 
-            /*credit = 0;
-            score = 0;
-            vie = 3;*/
+                    /*credit = 0;
+                    score = 0;
+                    vie = 3;*/
 
-            // TODO: Add your initialization logic here
-            _graphics.PreferredBackBufferWidth = LARGEUR_FENETRE;
-            _graphics.PreferredBackBufferHeight = HAUTEUR_FENETRE;
-            _graphics.ApplyChanges();
+                    // TODO: Add your initialization logic here
+                    _graphics.PreferredBackBufferWidth = LARGEUR_FENETRE;
+                    _graphics.PreferredBackBufferHeight = HAUTEUR_FENETRE;
+                    _graphics.ApplyChanges();
 
-            IsMouseVisible = true;
+                    IsMouseVisible = true;
 
-            base.Initialize();
+                    base.Initialize();
+                }
+            }
         }
 
         protected override void LoadContent()
@@ -147,7 +149,7 @@ namespace jeux
             _police = Content.Load<SpriteFont>("Fonts/Font");
             _textureBackgroundMenu = Content.Load<Texture2D>("backgroundMenu");
 
-            _myScreen1 = new MyScreen1(this); // en leur donnant une référence au Game
+           _myScreen1 = new MyScreen1(this);  // en leur donnant une référence au Game
             _myScreen2 = new MyScreen2(this);
             // TODO: use this.Content to load your game content here
         }
@@ -201,9 +203,7 @@ namespace jeux
 
             // TODO: Add your drawing code here
 
-            /*_spriteBatch.DrawString(_police, $"Score  : {score}", _positionScore, Color.White);
-            _spriteBatch.DrawString(_police, $"Vie   : {vie}", _positionVie, Color.Red);
-            _spriteBatch.DrawString(_police, $"Crédit  : {credit}", _positionCredit, Color.Blue);*/
+           
 
 
 
