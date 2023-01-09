@@ -18,7 +18,7 @@ namespace jeux
         // défini dans Game1
 
         private SpriteBatch _spriteBatch;
-        
+
         private List<Composantes> _gameComponents;
 
         private Texture2D _textureBackgroundMenu;
@@ -30,22 +30,21 @@ namespace jeux
         private Rectangle boutonTouche;
         private Rectangle boutonRegle;
         private Rectangle boutonJouer;
-        private Rectangle boutonBoutique;
 
         private readonly ScreenManager _screenManager;
 
-        public SpriteBatch SpriteBatch { get; set; }        
+        public SpriteBatch SpriteBatch { get; set; }
 
         public ScreenMenu(Game1 game) : base(game)
         {
             _myGame = game;
-            
+
             Content.RootDirectory = "Content";
 
             _screenManager = new ScreenManager();
         }
 
-        
+
         public override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -54,13 +53,12 @@ namespace jeux
             boutonTouche = new Rectangle(1725, 950, 1875, 1020);
             boutonRegle = new Rectangle(1725, 15, 1875, 80);
             boutonJouer = new Rectangle(875, 435, 1025, 505);
-            boutonBoutique = new Rectangle(0, 0, 0, 0);
 
-            /*var jouerBouton = new Bouton(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
+            var jouerBouton = new Bouton(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
             {
-                Position = new Vector2(850, 420),
+                Position = new Vector2(850, 421),
                 Text = "JOUER",
-            };*/
+            };
 
             var quitterBouton = new Bouton(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
             {
@@ -72,7 +70,7 @@ namespace jeux
             {
                 Position = new Vector2(1700, 935),
                 Text = "TOUCHE",
-            };           
+            };
 
             var regleBouton = new Bouton(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
             {
@@ -80,25 +78,18 @@ namespace jeux
                 Text = "REGLE",
             };
 
-            var boutiqueBouton = new Bouton(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
-            {
-                Position = new Vector2(850, 520),
-                Text = "BOUTIQUE",
-            };
-
             _gameComponents = new List<Composantes>()
             {
-                //jouerBouton,
+                jouerBouton,
                 quitterBouton,
                 toucheBouton,
                 regleBouton,
-                boutiqueBouton,
             };
 
             _textureBackgroundMenu = Content.Load<Texture2D>("backgroundMenu");
 
             base.LoadContent();
-        }        
+        }
 
         public override void Update(GameTime gameTime)
         {
@@ -108,7 +99,7 @@ namespace jeux
             MouseState _mouseState = Mouse.GetState();
             if (_mouseState.LeftButton == ButtonState.Pressed)
             {
-                    Console.WriteLine(Mouse.GetState().X + "," + Mouse.GetState().Y);
+                Console.WriteLine(Mouse.GetState().X + "," + Mouse.GetState().Y);
                 if (boutonFermer.Contains(Mouse.GetState().X, Mouse.GetState().Y))
                 { _myGame.Etat = Game1.Etats.Quitter; }
 
@@ -120,9 +111,6 @@ namespace jeux
 
                 else if (boutonJouer.Contains(Mouse.GetState().X, Mouse.GetState().Y))
                 { _myGame.Etat = Game1.Etats.Jouer; }
-
-                else if (boutonBoutique.Contains(Mouse.GetState().X, Mouse.GetState().Y))
-                { _myGame.Etat = Game1.Etats.Boutique; }
             }
         }
 
