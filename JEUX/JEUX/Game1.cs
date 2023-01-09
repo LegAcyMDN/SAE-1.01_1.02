@@ -24,14 +24,15 @@ namespace jeux
 
         private readonly ScreenManager _screenManager;
 
-        public enum Etats {Menu, Jouer, Controle, Regle, Quitter, FermerTouche, 
-                            FermerRegle};
+        public enum Etats {Menu, Jouer, Controle, Regle, Boutique, Quitter, FermerTouche, 
+                            FermerRegle, FermerBoutique};
         private Etats etat;
 
         private ScreenMenu _menu;
         private ScreenTouche _touche;
         private ScreenRegle _regle;
         private ScreenJouer _jouer;
+        private ScreenBoutique _boutique;
         
         public SpriteBatch SpriteBatch 
         { 
@@ -85,6 +86,7 @@ namespace jeux
             _touche = new ScreenTouche(this);
             _regle = new ScreenRegle(this);
             _jouer = new ScreenJouer(this);
+            _boutique = new ScreenBoutique(this);
 
             //_test = new ScreenTest(this);
         }
@@ -145,6 +147,11 @@ namespace jeux
                 else if (this.Etat == Etats.FermerRegle)
                     _screenManager.LoadScreen(_menu);
 
+                else if (this.Etat == Etats.Boutique)
+                    _screenManager.LoadScreen(_boutique);
+
+                else if (this.Etat == Etats.FermerBoutique)
+                    _screenManager.LoadScreen(_menu);
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Back))
