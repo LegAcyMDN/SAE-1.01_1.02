@@ -17,14 +17,6 @@ namespace jeux
 
 
 
-
-
-
-
-
-
-
-
         /*private Texture2D _textureCharacterP;
         private Texture2D _texturePoint;
         private Texture2D _textureObstacleP;
