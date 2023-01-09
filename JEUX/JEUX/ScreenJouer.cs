@@ -27,7 +27,7 @@ namespace jeux
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            //_textureBackgroundMenu = Content.Load<Texture2D>("backgroundMenu");
+            _textureBackgroundMenu = Content.Load<Texture2D>("backgroundMenu");
 
             base.LoadContent();
         }
