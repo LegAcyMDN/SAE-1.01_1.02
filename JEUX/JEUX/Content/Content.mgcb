@@ -49,6 +49,18 @@
 /processorParam:TextureFormat=Color
 /build:Controls/button3.png
 
+#begin Controls/buttonAvatar.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Controls/buttonAvatar.png
+
 #begin Controls/buttonCancel.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -72,18 +84,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Controls/buttonClose.png
-
-#begin Controls/buttonShopTest.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Controls/buttonShopTest.png
 
 #begin Controls/shopPixel.png
 /importer:TextureImporter

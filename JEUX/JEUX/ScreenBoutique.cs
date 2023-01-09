@@ -42,15 +42,15 @@ namespace jeux
                 Position = new Vector2(20, 20)
             };
 
-            var boutiqueBouton = new Bouton(Content.Load<Texture2D>("Controls/ButtonShopTest"), Content.Load<SpriteFont>("Fonts/Font"))
+            var avatarBouton = new Bouton(Content.Load<Texture2D>("Controls/ButtonAvatar"), Content.Load<SpriteFont>("Fonts/Font"))
             {
-                Position = new Vector2(50, 50)
+                Position = new Vector2(790, 320)
             };
 
             _gameComponents = new List<Composantes>()
             { 
                 quitterBouton,
-                boutiqueBouton,
+                avatarBouton,
             };
 
             _textureBackgroundMenu = Content.Load<Texture2D>("backgroundMenu");

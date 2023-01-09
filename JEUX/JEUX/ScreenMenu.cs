@@ -50,11 +50,11 @@ namespace jeux
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            boutonFermer = new Rectangle(20, 950, 155, 65);
+            boutonFermer = new Rectangle(20, 950, 170, 1000);
             boutonTouche = new Rectangle(1725, 950, 1875, 1020);
             boutonRegle = new Rectangle(1725, 15, 1875, 80);
             boutonJouer = new Rectangle(875, 415, 1025, 485);
-            boutonBoutique = new Rectangle(0, 0, 0, 0);
+            boutonBoutique = new Rectangle(850, 900, 950, 1000);
 
             var jouerBouton = new Bouton(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
             {
@@ -80,10 +80,9 @@ namespace jeux
                 Text = "REGLE",
             };
 
-            var boutiqueBouton = new Bouton(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
+            var boutiqueBouton = new Bouton(Content.Load<Texture2D>("Controls/ShopPixel"), Content.Load<SpriteFont>("Fonts/Font"))
             {
-                Position = new Vector2(850, 935),
-                Text = "BOUTIQUE",
+                Position = new Vector2(850, 900),
             };
 
             _gameComponents = new List<Composantes>()
