@@ -30,6 +30,7 @@ namespace jeux
         private Rectangle boutonTouche;
         private Rectangle boutonRegle;
         private Rectangle boutonJouer;
+        private Rectangle boutonBoutique;
 
         private readonly ScreenManager _screenManager;
 
@@ -52,11 +53,12 @@ namespace jeux
             boutonFermer = new Rectangle(20, 950, 155, 65);
             boutonTouche = new Rectangle(1725, 950, 1875, 1020);
             boutonRegle = new Rectangle(1725, 15, 1875, 80);
-            boutonJouer = new Rectangle(875, 435, 1025, 505);
+            boutonJouer = new Rectangle(875, 415, 1025, 485);
+            boutonBoutique = new Rectangle(0, 0, 0, 0);
 
             var jouerBouton = new Bouton(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
             {
-                Position = new Vector2(850, 421),
+                Position = new Vector2(850, 400),
                 Text = "JOUER",
             };
 
@@ -78,12 +80,19 @@ namespace jeux
                 Text = "REGLE",
             };
 
+            var boutiqueBouton = new Bouton(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
+            {
+                Position = new Vector2(850, 935),
+                Text = "BOUTIQUE",
+            };
+
             _gameComponents = new List<Composantes>()
             {
                 jouerBouton,
                 quitterBouton,
                 toucheBouton,
                 regleBouton,
+                boutiqueBouton
             };
 
             _textureBackgroundMenu = Content.Load<Texture2D>("backgroundMenu");
@@ -111,6 +120,9 @@ namespace jeux
 
                 else if (boutonJouer.Contains(Mouse.GetState().X, Mouse.GetState().Y))
                 { _myGame.Etat = Game1.Etats.Jouer; }
+
+                else if (boutonBoutique.Contains(Mouse.GetState().X, Mouse.GetState().Y))
+                { _myGame.Etat = Game1.Etats.Boutique; }
             }
         }
 

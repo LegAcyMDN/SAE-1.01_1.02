@@ -1,4 +1,4 @@
-﻿/*using jeux.Controls;
+﻿using jeux.Controls;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -80,4 +80,4 @@ namespace jeux
             _spriteBatch.End();
         }
     }
-}*/
+}
