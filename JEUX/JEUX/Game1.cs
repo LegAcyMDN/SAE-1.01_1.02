@@ -16,12 +16,12 @@ namespace jeux
         public const int hauteurP = 150;
         public const int largeurP = 50;
         
-        private Texture2D _textureCharacterP;
+        /*private Texture2D _textureCharacterP;
         private Texture2D _texturePoint;
         private Texture2D _textureObstacleP;
         private Texture2D _textureObstacleD;
         private Texture2D _textureObstacleT;
-        private Texture2D _textureObstacleQ;
+        private Texture2D _textureObstacleQ;*/
 
         /*private int score;
         private int credit;
@@ -31,7 +31,7 @@ namespace jeux
         private SpriteFont _police;
         
         private Color _backgroundColour = Color.CornflowerBlue;
-        private List<Component> _gameComponents;
+        private List<Composantes> _gameComponents;
 
         private Texture2D _textureBackgroundMenu;
 
@@ -42,12 +42,15 @@ namespace jeux
 
         public SpriteBatch SpriteBatch { get; set; }
         
+        private Test _test;
+        private Regle _regle;        
 
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+
 
             _screenManager = new ScreenManager();
             Components.Add(_screenManager);
@@ -67,102 +70,104 @@ namespace jeux
                 IsMouseVisible = true;
 
 
-            /*   _textureCharacterP = Content.Load<Texture2D>("characterP");
+               _textureCharacterP = Content.Load<Texture2D>("characterP");
                 _texturePoint = Content.Load<Texture2D>("Point");
                 _textureObstacleP = Content.Load<Texture2D>("ObstacleP");
                 _textureObstacleD = Content.Load<Texture2D>("ObstacleD");
                 _textureObstacleT = Content.Load<Texture2D>("ObstacleT");
-                _textureObstacleQ = Content.Load<Texture2D>("ObstacleQ");   */
+                _textureObstacleQ = Content.Load<Texture2D>("ObstacleQ");
         {
             // TODO: Add your initialization logic here
 
-            
+            /*_textureCharacterP = Content.Load<Texture2D>("characterP");
+            _texturePoint = Content.Load<Texture2D>("Point");
+            _textureObstacleP = Content.Load<Texture2D>("ObstacleP");
+            _textureObstacleD = Content.Load<Texture2D>("ObstacleD");
+            _textureObstacleT = Content.Load<Texture2D>("ObstacleT");
+            _textureObstacleQ = Content.Load<Texture2D>("ObstacleQ");*/
 
-              /*   credit = 0;
-                score = 0;
-                vie = 3;*/
+            /*credit = 0;
+            score = 0;
+            vie = 3;*/
 
+            // TODO: Add your initialization logic here
             _graphics.PreferredBackBufferWidth = LARGEUR_FENETRE;
             _graphics.PreferredBackBufferHeight = HAUTEUR_FENETRE;
             _graphics.ApplyChanges();
 
-            base.Initialize();
-        }
+            IsMouseVisible = true;
 
-                _graphics.ApplyChanges();
-                base.Initialize();
-            }
+            base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-
-            var playButton = new Button(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
+            var jouerBouton = new Bouton(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
             {
                 Position = new Vector2(850 , 421),
                 Text = "JOUER",
             };
 
-            playButton.Click += PlayButton_Click;
+            jouerBouton.Click += JouerBouton_Click;
 
-            var quitButton = new Button(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
+            var quitterBouton = new Bouton(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
             {
                 Position = new Vector2(0, 935),
                 Text = "FERMER",
             };
 
-            quitButton.Click += QuitButton_Click;
+            quitterBouton.Click += QuitterBouton_Click;
 
-            var keyButton = new Button(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
+            var toucheBouton = new Bouton(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
             {
                 Position = new Vector2(1700, 935),
                 Text = "TOUCHES",
             };
 
-            keyButton.Click += KeyButton_Click;
+            toucheBouton.Click += ToucheBouton_Click;
 
-            var ruleButton = new Button(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
+            var regleBouton = new Bouton(Content.Load<Texture2D>("Controls/Button3"), Content.Load<SpriteFont>("Fonts/Font"))
             {
                 Position = new Vector2(1700, 0),
                 Text = "REGLES",
             };
 
-            ruleButton.Click += RuleButton_Click;
+            regleBouton.Click += RegleBouton_Click;
 
-            _gameComponents = new List<Component>()
+            _gameComponents = new List<Composantes>()
             {
-                playButton, 
-                quitButton,
-                keyButton,
-                ruleButton,
+                jouerBouton, 
+                quitterBouton,
+                toucheBouton,
+                regleBouton,
             };
 
             _police = Content.Load<SpriteFont>("Fonts/Font");
             _textureBackgroundMenu = Content.Load<Texture2D>("backgroundMenu");
 
-          /*  _myScreen1 = new MyScreen1(this); // en leur donnant une référence au Game
-            _myScreen2 = new MyScreen2(this);*/
+            _myScreen1 = new MyScreen1(this); // en leur donnant une référence au Game
+            _myScreen2 = new MyScreen2(this);
             // TODO: use this.Content to load your game content here
         }
 
-        private void RuleButton_Click(object sender, EventArgs e)
+        private void RegleBouton_Click(object sender, EventArgs e)
+        {
+            _screenManager.LoadScreen(_regle);
+        }
+
+        private void ToucheBouton_Click(object sender, EventArgs e)
+        {
+            _screenManager.LoadScreen(_test);
+        }
+
+        private void QuitterBouton_Click(object sender, EventArgs e)
         {
             Exit();
         }
 
-        private void KeyButton_Click(object sender, EventArgs e)
-        {
-            Exit();
-        }
-
-        private void QuitButton_Click(object sender, EventArgs e)
-        {
-            Exit();
-        }
-
-        private void PlayButton_Click(object sender, EventArgs e)
+        private void JouerBouton_Click(object sender, EventArgs e)
         {
             var random = new Random();
 
@@ -184,27 +189,25 @@ namespace jeux
         {
             GraphicsDevice.Clear(_backgroundColour);
 
+            // TODO: Add your drawing code here
+
+            _spriteBatch.Begin();
+
+            _spriteBatch.Draw(_textureBackgroundMenu, new Rectangle(0, 0, LARGEUR_FENETRE, HAUTEUR_FENETRE), Color.White);
+            
+            foreach (var component in _gameComponents)
+                component.Draw(gameTime, _spriteBatch);
+            _spriteBatch.End();
+
+            // TODO: Add your drawing code here
+
             /*_spriteBatch.DrawString(_police, $"Score  : {score}", _positionScore, Color.White);
             _spriteBatch.DrawString(_police, $"Vie   : {vie}", _positionVie, Color.Red);
             _spriteBatch.DrawString(_police, $"Crédit  : {credit}", _positionCredit, Color.Blue);*/
 
-            GraphicsDevice.Clear(_backgroundColour);
 
-            _spriteBatch.Begin();
-            _spriteBatch.Draw(_textureBackgroundMenu, new Rectangle(0, 0, LARGEUR_FENETRE, HAUTEUR_FENETRE), Color.White);
-            foreach (var component in _gameComponents)
-                component.Draw(gameTime, _spriteBatch);
-            
-
-            // TODO: Add your drawing code here
-
-           
-
-            _spriteBatch.End();
 
             base.Draw(gameTime);
-
-
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace jeux
 {
-    public abstract class Component
+    public abstract class Composantes
     {
         public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
 
